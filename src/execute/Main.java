@@ -12,10 +12,9 @@ public class Main {
 			Package p = new Package((double)i/10);
 			bin.addItem(p);
 		}
-		for(Package p: bin.getItems())
-		{
-			System.out.println(p.getSize());
-		}
+		
+		Helper.printBin(bin);
+		
 	}
 
 }

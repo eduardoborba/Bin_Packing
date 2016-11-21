@@ -24,6 +24,9 @@ public class Bin {
 		return this.items;
 	}
 	
+	public double getTotalSize(){
+		return this.totalSize;
+	}
 	
 	
 }
