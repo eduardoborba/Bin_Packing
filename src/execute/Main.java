@@ -1,20 +1,16 @@
 package execute;
 
-import model.Bin;
-import model.Package;
+import java.io.File;
+
+import model.Init_Set;
 
 public class Main {
 
 	public static void main(String[] args) {
-		Bin bin = new Bin();
-		for(int i = 0; i < 10; i++)
-		{
-			Package p = new Package((double)i/10);
-			bin.addItem(p);
-		}
-		
-		Helper.printBin(bin);
-		
+		File file = Helper.openFile();
+		Init_Set init = Helper.readFile(file);
+		System.out.println(init.getNumberOfBins());
+		Helper.printBin(init.getPackages());
 	}
 
 }
