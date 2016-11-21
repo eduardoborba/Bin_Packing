@@ -1,6 +1,11 @@
 # Bin_Packing
 
 
-## Trabalho final de Projeto de Algoritmos -- PAA
+## Trabalho final de Projeto de Algoritmos - PAA 2016
 
-Daniel e Eduardo
+Autores: Daniel e Eduardo
+
+
+O presente trabalho consiste em...
+
+
