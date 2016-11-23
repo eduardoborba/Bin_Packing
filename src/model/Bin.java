@@ -11,9 +11,13 @@ public class Bin {
 		this.totalSize = 0;
 	}
 	
-	public void addItem(Package p) {
-		this.items.add(p);
-		this.totalSize += p.getSize();
+	public boolean addItem(Package p) {
+		if (this.totalSize + p.getSize() <= 1.0) {
+			this.items.add(p);
+			this.totalSize += p.getSize();
+			return true;
+		}
+		return false;
 	}
 	
 	public Package getItem(int pos) {

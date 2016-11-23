@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import model.Init_Set;
 import model.Bin;
+import model.Bin_Set;
 import model.Package;
 
 public class Helper {
@@ -20,6 +21,25 @@ public class Helper {
 		}
 	}
 	
+	public static void printInit_Set(Init_Set init) {
+		System.out.println("==============================");
+		System.out.println("Number of bins: " + init.getNumberOfBins());
+		for(Package p: init.getPackages())
+		{
+			System.out.println(p.getSize());
+		}
+	}
+	
+	public static void printBin_Set(Bin_Set bins) {
+		int count = 0;
+		for(Bin b: bins.getBins()) {
+			if(b.getTotalSize() > 0.0) {
+				Helper.printBin(b);
+				count++;
+			}
+		}
+		System.out.println("Number of Bins: " + count);
+	}
 	
 	public static File openFile() {
 		File file = new File("in.txt");
@@ -27,18 +47,17 @@ public class Helper {
 	}
 	
 	public static Init_Set readFile(File file) {
-		int numberOfBins = 0;
-		Bin packages = new Bin();
+		Init_Set init = new Init_Set();
 		BufferedReader reader = null;
 		try {
 		    reader = new BufferedReader(new FileReader(file));
 		    String text = null;
 		    text = reader.readLine();
-		    numberOfBins = Integer.parseInt(text);
+		    init.setNumberOfBins(Integer.parseInt(text));
 		    
 		    while ((text = reader.readLine()) != null) {
 		    	Package item = new Package(Double.parseDouble(text));
-		        packages.addItem(item);
+		        init.addItem(item);
 		    }
 		} catch (FileNotFoundException e) {
 		    e.printStackTrace();
@@ -52,10 +71,6 @@ public class Helper {
 		    } catch (IOException e) {
 		    }
 		}
-		
-		Init_Set all = new Init_Set();
-		all.setPackages(packages);
-		all.setNumberOfBins(numberOfBins);
-		return all;
+		return init;
 	}
 }
