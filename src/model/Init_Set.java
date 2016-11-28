@@ -37,7 +37,7 @@ public class Init_Set {
 		this.packages.add(p);
 	}
 	
-	public void orderPackages() {
+	public void ascOrderPackages() { //ascending order
 		Collections.sort(packages, new Comparator<Package>() {
 		    @Override
 		    public int compare(Package p1, Package p2) {
@@ -47,5 +47,15 @@ public class Init_Set {
 		    }
 		});
 	}
-	
+	// decreasing order. Collections.sort(list, Collections.reverseOrder());
+	public void decOrderPackages() { //ascending order
+		Collections.sort(packages, new Comparator<Package>() {
+		    @Override
+		    public int compare(Package p1, Package p2) {
+		    	if (p1.getSize() > p2.getSize()) return 1;
+		        if (p1.getSize() < p2.getSize()) return -1;
+		        return 0;
+		    }
+		});
+	}
 }
