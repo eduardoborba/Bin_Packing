@@ -17,6 +17,7 @@ public class Heuristic {
 			}
 		}
 	}
+	
 	/* Fist Fit Decreasing
 	 * Algoritmo offline que processa na ordem do vetor inicial
 	 * */
@@ -30,6 +31,15 @@ public class Heuristic {
 		}
 	}
 
+	public static void WFD(Init_Set packages, Bin_Set bins) {
+		for(Package p: packages.getPackages()) {
+			for(Bin b: bins.getBins())
+			{
+				if(b.addItem(p))
+					break;
+			}
+		}
+	}
 	
    /* public static void bruteforce(Init_Set packages, Bin_Set bins, int currentPosition) {
         if (currentPosition >= packages.getNumberOfBins()) { // reached last item, done with this iteration

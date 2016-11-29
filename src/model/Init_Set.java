@@ -6,7 +6,10 @@ import java.util.Comparator;
 
 public class Init_Set {
 	private ArrayList<Package> packages;
+	private ArrayList<Double> weight_ald;
+	private double weight_d;
 	private int numberOfBins;
+	private double somaTotal;
 	
 	public Init_Set() {
 		this.packages = new ArrayList<Package>();
@@ -31,6 +34,32 @@ public class Init_Set {
 	
 	public Package getPackage(int pos) {
 		return this.packages.get(pos);
+	}
+	
+	public double getSomaTotal(){
+		return this.somaTotal;
+	}
+	
+	public void setSomaTotal(double soma){
+		this.somaTotal = soma;
+	}
+
+	public ArrayList<Double> getWeight_ald() {
+		return weight_ald;
+	}
+
+	public void setWeight_ald(ArrayList<Double> weight_ald) {
+		//Quando temos um vetor, configurar o maxWeight com a média do vetor
+		setWeight_d(weight_ald.stream().mapToDouble(i -> i).average().orElse(0.0));
+		this.weight_ald = weight_ald;
+	}
+
+	public double getWeight_d() {
+		return weight_d;
+	}
+
+	public void setWeight_d(double weight_d) {
+		this.weight_d = weight_d;
 	}
 	
 	public void addItem(Package p) {
