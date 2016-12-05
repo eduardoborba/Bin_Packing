@@ -3,11 +3,10 @@ package model;
 import java.util.ArrayList;
 
 /**
- * 
  * @author Dani & Duda
  * Bin_Set é um conjunto de bins
- *
  */
+
 public class Bin_Set {
 	private ArrayList<Bin> bins;
 	private int numberOfBins;
@@ -26,14 +25,13 @@ public class Bin_Set {
 	}
 	
 	/*
-	 * Bins heterogeneos, ie, todos com pesos diferentes  
+	 * Bins heterogeneos, ie, com pesos diferentes  
 	 */
 	public Bin_Set(int numberOfBins, ArrayList<Double> maxWeight) {
 		bins = new ArrayList<Bin>();
 		setNumberOfBins(numberOfBins);
 		for(int i = 0; i < numberOfBins; i++) {
 			Bin b = new Bin();
-			// Permite ter bins , mas não é implementado aqui
 			b.setMaxWeight(maxWeight.get(i)); 
 			bins.add(b);
 		}
@@ -41,6 +39,10 @@ public class Bin_Set {
 	
 	public ArrayList<Bin> getBins() {
 		return this.bins;
+	}
+	
+	public Bin getNextBin(int pos) {
+		return getBins().get(pos);
 	}
 
 	public int getNumberOfBins() {

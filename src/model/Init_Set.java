@@ -15,7 +15,12 @@ public class Init_Set {
 		this.packages = new ArrayList<Package>();
 		this.numberOfBins = 0;
 	}
+
+	public Package getPackage(int pos) {
+		return this.packages.get(pos);
+	}
 	
+	/*Getters and Setters*/
 	public void setNumberOfBins(int pnumberOfBins) {
 		this.numberOfBins = pnumberOfBins;
 	}
@@ -30,10 +35,6 @@ public class Init_Set {
 	
 	public ArrayList<Package> getPackages() {
 		return this.packages;
-	}
-	
-	public Package getPackage(int pos) {
-		return this.packages.get(pos);
 	}
 	
 	public double getSomaTotal(){

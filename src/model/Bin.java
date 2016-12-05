@@ -14,11 +14,38 @@ public class Bin {
 	private ArrayList<Package> items;
 	private double totalSize;
 	private double maxWeight;
+	private double currentSize;
 
 	public Bin() {
 		this.items = new ArrayList<Package>();
 		this.totalSize = 0;
 	}
+	
+    public Bin deepCopy() {
+        Bin copy = new Bin();
+        copy.items = new ArrayList<Package>(items); // Integers are not copied by reference
+        copy.currentSize = currentSize;
+        copy.maxWeight = maxWeight;
+        return copy;
+    }
+	
+    public boolean put(Double val) {
+    	Package item = new Package(val);
+        if (currentSize + val <= maxWeight) {
+            items.add(item);
+            currentSize += val;
+            return true;
+        } else {
+            return false; // item didn't fit
+        }
+    }
+	
+    public void remove(Double item) {
+        items.remove(item);
+        currentSize -= item;
+    }
+    
+	/*Getters and Setters*/
 		
 	public double getMaxWeight() {
 		return maxWeight;
@@ -49,5 +76,8 @@ public class Bin {
 		return this.totalSize;
 	}
 	
+	public double numberOfItems(){
+		return this.items.size();
+	}
 	
 }

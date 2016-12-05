@@ -95,6 +95,7 @@ public class Helper {
 		            reader.close();
 		        }
 		    } catch (IOException e) {
+		    	
 		    }
 		}
 		return init;

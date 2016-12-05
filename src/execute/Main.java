@@ -19,15 +19,15 @@ public class Main {
 		else 
 			bins = new Bin_Set(packages.getNumberOfBins(),packages.getWeight_ald());
 				
-		System.out.println("Numero de itens:"+packages.getPackages().size());
-		System.out.println("Numero de bins:"+packages.getNumberOfBins());
-		System.out.println("Bin otimo: "+Helper.getOptimalNumberOfBins(packages));
+		System.out.print("Numero de itens:"+packages.getPackages().size());
+		System.out.print(", Numero maximo de bins:"+packages.getNumberOfBins());
+		System.out.println(", N# otimo de Bins (OPT): "+Helper.getOptimalNumberOfBins(packages));
 		
-		System.out.print("\nBFD:");
-		Heuristic.BFD(packages, bins);
+		System.out.print("\nFFD:");
+		Heuristic.FFD(packages, bins);
 		Helper.printBin_Set(bins);
 		
-		System.out.print("\nFFD:\n");
+		System.out.print("\nFF:\n");
 		file = Helper.openFile("in2.txt");
 		packages = Helper.readFile(file);
 		if(Helper.isTypeOfWheights())
