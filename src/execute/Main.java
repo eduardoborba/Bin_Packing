@@ -11,7 +11,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		Bin_Set bins;
-		File file = Helper.openFile("in2.txt");
+		String fileName = "in.txt";
+		File file = Helper.openFile(fileName);
 		Init_Set packages = Helper.readFile(file);
 		
 		if(Helper.isTypeOfWheights())
@@ -28,7 +29,7 @@ public class Main {
 		Helper.printBin_Set(bins);
 		
 		System.out.print("\nFF:\n");
-		file = Helper.openFile("in2.txt");
+		file = Helper.openFile(fileName);
 		packages = Helper.readFile(file);
 		if(Helper.isTypeOfWheights())
 			bins = new Bin_Set(packages.getNumberOfBins(),packages.getWeight_d());
@@ -36,6 +37,17 @@ public class Main {
 			bins = new Bin_Set(packages.getNumberOfBins(),packages.getWeight_ald());
 		
 		Heuristic.FFD(packages, bins);
+		Helper.printBin_Set(bins);
+		
+		System.out.print("\nNF:\n");
+		file = Helper.openFile(fileName);
+		packages = Helper.readFile(file);
+		if(Helper.isTypeOfWheights())
+			bins = new Bin_Set(packages.getNumberOfBins(),packages.getWeight_d());
+		else 
+			bins = new Bin_Set(packages.getNumberOfBins(),packages.getWeight_ald());
+		
+		Heuristic.NF(packages, bins);
 		Helper.printBin_Set(bins);
 	}
 
