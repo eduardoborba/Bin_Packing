@@ -51,7 +51,7 @@ public class Init_Set {
 
 	public void setWeight_ald(ArrayList<Double> weight_ald) {
 		//Quando temos um vetor, configurar o maxWeight com a média do vetor
-		setWeight_d(weight_ald.stream().mapToDouble(i -> i).average().orElse(0.0));
+		setWeight_d(weight_ald.stream().mapToDouble(i -> i). average().orElse(0.0));
 		this.weight_ald = weight_ald;
 	}
 
@@ -77,13 +77,14 @@ public class Init_Set {
 		    }
 		});
 	}
+	
 	// decreasing order. Collections.sort(list, Collections.reverseOrder());
 	public void decOrderPackages() { //ascending order
 		Collections.sort(packages, new Comparator<Package>() {
 		    @Override
 		    public int compare(Package p1, Package p2) {
-		    	if (p1.getSize() > p2.getSize()) return 1;
-		        if (p1.getSize() < p2.getSize()) return -1;
+		    	if (p1.getSize() > p2.getSize()) return -1;
+		        if (p1.getSize() < p2.getSize()) return 1;
 		        return 0;
 		    }
 		});

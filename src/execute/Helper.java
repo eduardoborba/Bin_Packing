@@ -19,6 +19,15 @@ public class Helper {
 	private static ArrayList<Double> weight_ald; 
 	private static boolean typeOfWheights;
 
+	public static Bin_Set setBinsByType(Init_Set packages){
+		Bin_Set bins;
+		if(Helper.isTypeOfWheights())
+			bins = new Bin_Set(packages.getNumberOfBins(), packages.getWeight_d());
+		else 
+			bins = new Bin_Set(packages.getNumberOfBins(),packages.getWeight_ald());
+		return bins;
+	}
+	
 	public static void printBin(Bin bin) {
 		DecimalFormat df = new DecimalFormat("#.###");
 		df.setRoundingMode(RoundingMode.CEILING);
@@ -79,6 +88,7 @@ public class Helper {
 		        init.addItem(item);
 		    }
 		    init.setSomaTotal(soma);
+		    
 		    
 		    if (t) 
 		    	init.setWeight_d(getWeight_d());

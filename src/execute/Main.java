@@ -10,45 +10,33 @@ import solution.Heuristic;
 public class Main {
 
 	public static void main(String[] args) {
-		Bin_Set bins;
+		Bin_Set binsFFD, binsFF;
 		String fileName = "in.txt";
 		File file = Helper.openFile(fileName);
-		Init_Set packages = Helper.readFile(file);
+		Init_Set packagesFFD, packagesFF;
 		
-		if(Helper.isTypeOfWheights())
-			bins = new Bin_Set(packages.getNumberOfBins(),packages.getWeight_d());
-		else 
-			bins = new Bin_Set(packages.getNumberOfBins(),packages.getWeight_ald());
-				
-		System.out.print("Numero de itens:"+packages.getPackages().size());
-		System.out.print(", Numero maximo de bins:"+packages.getNumberOfBins());
-		System.out.println(", N# otimo de Bins (OPT): "+Helper.getOptimalNumberOfBins(packages));
+		
+		packagesFFD = Helper.readFile(file);
+		binsFFD = Helper.setBinsByType(packagesFFD);
+
+		System.out.println("Numero de itens:"+packagesFFD.getPackages().size());
+		System.out.println("Numero maximo de bins:"+packagesFFD.getNumberOfBins());
+		System.out.println("N# otimo de Bins (OPT): "+Helper.getOptimalNumberOfBins(packagesFFD)+
+				", Sum:"+packagesFFD.getSomaTotal());
 		
 		System.out.print("\nFFD:");
-		Heuristic.FFD(packages, bins);
-		Helper.printBin_Set(bins);
+		Heuristic.FFD(packagesFFD, binsFFD);
+		Helper.printBin_Set(binsFFD);
 		
+		/*
 		System.out.print("\nFF:\n");
 		file = Helper.openFile(fileName);
-		packages = Helper.readFile(file);
-		if(Helper.isTypeOfWheights())
-			bins = new Bin_Set(packages.getNumberOfBins(),packages.getWeight_d());
-		else 
-			bins = new Bin_Set(packages.getNumberOfBins(),packages.getWeight_ald());
+		packagesFF = Helper.readFile(file);
+		binsFF = Helper.setBinsByType(packagesFF);;
 		
-		Heuristic.FFD(packages, bins);
-		Helper.printBin_Set(bins);
-		
-		System.out.print("\nNF:\n");
-		file = Helper.openFile(fileName);
-		packages = Helper.readFile(file);
-		if(Helper.isTypeOfWheights())
-			bins = new Bin_Set(packages.getNumberOfBins(),packages.getWeight_d());
-		else 
-			bins = new Bin_Set(packages.getNumberOfBins(),packages.getWeight_ald());
-		
-		Heuristic.NF(packages, bins);
-		Helper.printBin_Set(bins);
+		Heuristic.FF(packagesFF, binsFF);
+		Helper.printBin_Set(binsFF);
+*/
 	}
 
 }

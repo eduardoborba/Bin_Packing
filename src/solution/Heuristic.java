@@ -3,6 +3,7 @@ package solution;
 import java.util.ArrayList;
 import java.util.List;
 
+import execute.Helper;
 import model.Bin;
 import model.Bin_Set;
 import model.Init_Set;
@@ -10,15 +11,16 @@ import model.Package;
 
 public class Heuristic {
 	
-	/*Private for bruteForce() only*/
-    private ArrayList<Bin> bins = new ArrayList<Bin>();
-    private double currentBestSolution;
-    private List<Bin> currentBestBins;
+	/*Private for bruteForce()*/
+    private static ArrayList<Bin> bins = new ArrayList<Bin>();
+    private static double currentBestSolution;
+    private static ArrayList<Bin> currentBestBins;
     /*END*/
     
     /* Fist Fit Decreasing */
 	public static void FFD(Init_Set packages, Bin_Set bins) {
-		packages.ascOrderPackages();
+		long startTime = System.currentTimeMillis();
+		packages.decOrderPackages();
 		for(Package p: packages.getPackages()) {
 			for(Bin b: bins.getBins())
 			{
@@ -26,34 +28,21 @@ public class Heuristic {
 					break;
 			}
 		}
+		long stopTime = System.currentTimeMillis();
+		System.out.println("Tempo: " + (stopTime - startTime));
 	}
 	
 	/* First Fit
 	 * Algoritmo FF que processa na ordem do vetor inicial
 	 * */
 	public static void FF(Init_Set packages, Bin_Set bins) {
+		//packages.ascOrderPackages();
 		for(Package p: packages.getPackages()) {
 			for(Bin b: bins.getBins())
 			{
 				if(b.addItem(p))
 					break;
 			}
-		}
-	}
-
-	/* Implementacao que apenas distribui o conjunto de itens nos bins*/
-	/*Dessa forma a complexidade é O(n) | 1 < n < 2*OPT */
-	public static void NF(Init_Set packages, Bin_Set bins) {
-		int i = 0;
-		Package p = packages.getPackage(i);
-		for(Bin b: bins.getBins())
-		{
-			if(b.addItem(p))
-				break;
-			else 
-				p = packages.getPackage(++i);
-			if (i == packages.getPackages().size())
-				return;
 		}
 	}
 	
@@ -63,20 +52,23 @@ public class Heuristic {
      * @param in list of items to be packed
      * @param currentPosition position in input list
      */
-    private void bruteforce(List<Double> in, int currentPosition) {
-        if (currentPosition >= in.size()) { // reached last item, done with this iteration
+    public static void bruteforce(Init_Set in, int currentPosition, Bin_Set BSbins) {
+        
+    	if (currentPosition >= in.getPackages().size()) { // reached last item, done with this iteration
             double filledBins = getFilledBinsCount();
             if (filledBins < currentBestSolution) { // is this solution better than the current best?
-                currentBestSolution = filledBins; // then save it
-                currentBestBins = deepCopy(bins);
+                System.out.println(currentBestSolution);
+            	currentBestSolution = filledBins; // then save it
+                currentBestBins = deepCopy(BSbins);
             }
             return;
         }
         // iterate over bins
-        double currentItem = in.get(currentPosition);
-        for (Bin bin : bins) {
+        double currentItem = in.getPackage(currentPosition).getSize();
+        System.out.println(currentItem);
+        for (Bin bin : BSbins.getBins()) {
             if (bin.put(currentItem)) {
-                bruteforce(in, currentPosition + 1);
+                bruteforce(in, ++currentPosition, BSbins);
                 bin.remove(currentItem);
             } // else: item did not fit in bin, ignore
         }
@@ -85,7 +77,7 @@ public class Heuristic {
     /**
      * returns how many bins currently have at least one item inside them.
      */
-    private double getFilledBinsCount() {
+    private static double getFilledBinsCount() {
         double filledBins = 0;
         for (Bin bin : bins) {
             if (bin.numberOfItems() != 0) {
@@ -95,10 +87,10 @@ public class Heuristic {
         return filledBins;
     }
     
-    public List<Bin> deepCopy(List<Bin> bins) {
+    public static ArrayList<Bin> deepCopy(Bin_Set bins) {
         ArrayList<Bin> copy = new ArrayList<Bin>();
-        for (int i = 0; i < bins.size(); i++) {
-            copy.add(bins.get(i).deepCopy());
+        for (int i = 0; i < bins.getBins().size(); i++) {
+            copy.add(bins.getBins().get(i).deepCopy());
         }
         return copy;
     }
